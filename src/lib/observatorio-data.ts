@@ -10,8 +10,8 @@ export interface MunicipioIndicadores {
   municipio: string;
   uf: string;
   populacao_total: number;
-  populacao_65_mais: number;
-  pct_65_mais: number;
+  populacao_60_mais: number;
+  pct_60_mais: number;
   escolas_total: number;
   escolas_publicas: number;
   escolas_privadas: number;

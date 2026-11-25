@@ -13,12 +13,12 @@ export const Route = createFileRoute("/")({
       { title: "Observatório Rede Saber 60+ — Região Norte" },
       {
         name: "description",
-        content: "Indicadores municipais 65+ e escolas da Região Norte alimentados por API REST real.",
+        content: "Indicadores municipais 60+ e escolas da Região Norte alimentados por API REST real.",
       },
       { property: "og:title", content: "Observatório Rede Saber 60+ — Região Norte" },
       {
         property: "og:description",
-        content: "Indicadores municipais 65+ e escolas da Região Norte alimentados por API REST real.",
+        content: "Indicadores municipais 60+ e escolas da Região Norte alimentados por API REST real.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -94,10 +94,10 @@ function ObservatorioPage() {
 
   const totais = useMemo(() => {
     const pop = munRecorte.reduce((s, m) => s + m.populacao_total, 0);
-    const pop65 = munRecorte.reduce((s, m) => s + m.populacao_65_mais, 0);
+    const pop60 = munRecorte.reduce((s, m) => s + m.populacao_60_mais, 0);
     const escTot = munRecorte.reduce((s, m) => s + m.escolas_total, 0);
     const escPub = munRecorte.reduce((s, m) => s + m.escolas_publicas, 0);
-    return { pop, pop65, pct65: pop > 0 ? (pop65 / pop) * 100 : 0, escTot, escPub };
+    return { pop, pop60, pct60: pop > 0 ? (pop60 / pop) * 100 : 0, escTot, escPub };
   }, [munRecorte]);
 
   return (
@@ -173,8 +173,8 @@ function ObservatorioPage() {
           {[
             { rot: "Municípios", num: fmt(munRecorte.length) },
             { rot: "População total", num: fmt(totais.pop) },
-            { rot: "População 65+", num: fmt(totais.pop65) },
-            { rot: "% 65+", num: fmtPct(totais.pct65) },
+            { rot: "População 60+", num: fmt(totais.pop60) },
+            { rot: "% 60+", num: fmtPct(totais.pct60) },
             { rot: "Escolas totais", num: fmt(totais.escTot) },
             { rot: "Escolas públicas", num: fmt(totais.escPub) },
           ].map((c) => (
@@ -200,8 +200,8 @@ function ObservatorioPage() {
                   <tr>
                     <th className="px-3 py-2">Município</th>
                     <th className="px-3 py-2 text-right">Pop. total</th>
-                    <th className="px-3 py-2 text-right">65+</th>
-                    <th className="px-3 py-2 text-right">% 65+</th>
+                    <th className="px-3 py-2 text-right">60+</th>
+                    <th className="px-3 py-2 text-right">% 60+</th>
                     <th className="px-3 py-2 text-right">Escolas</th>
                   </tr>
                 </thead>
@@ -210,8 +210,8 @@ function ObservatorioPage() {
                     <tr key={m.codigo_municipio} className="border-t border-border hover:bg-muted/40">
                       <td className="px-3 py-2 font-medium">{m.municipio}</td>
                       <td className="px-3 py-2 text-right">{fmt(m.populacao_total)}</td>
-                      <td className="px-3 py-2 text-right">{fmt(m.populacao_65_mais)}</td>
-                      <td className="px-3 py-2 text-right">{fmtPct(m.pct_65_mais)}</td>
+                      <td className="px-3 py-2 text-right">{fmt(m.populacao_60_mais)}</td>
+                      <td className="px-3 py-2 text-right">{fmtPct(m.pct_60_mais)}</td>
                       <td className="px-3 py-2 text-right">{fmt(m.escolas_total)}</td>
                     </tr>
                   ))}
