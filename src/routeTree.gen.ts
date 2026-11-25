@@ -10,33 +10,91 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicEscolasRouteImport } from './routes/api/public/escolas'
+import { Route as ApiPublicObservatorioEstadosRouteImport } from './routes/api/public/observatorio/estados'
+import { Route as ApiPublicObservatorioMunicipiosRouteImport } from './routes/api/public/observatorio/municipios'
+import { Route as ApiPublicObservatorioMunicipiosCodigo_municipioRouteImport } from './routes/api/public/observatorio/municipios.$codigo_municipio'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicEscolasRoute = ApiPublicEscolasRouteImport.update({
+  id: '/api/public/escolas',
+  path: '/api/public/escolas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicObservatorioEstadosRoute =
+  ApiPublicObservatorioEstadosRouteImport.update({
+    id: '/api/public/observatorio/estados',
+    path: '/api/public/observatorio/estados',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicObservatorioMunicipiosRoute =
+  ApiPublicObservatorioMunicipiosRouteImport.update({
+    id: '/api/public/observatorio/municipios',
+    path: '/api/public/observatorio/municipios',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicObservatorioMunicipiosCodigo_municipioRoute =
+  ApiPublicObservatorioMunicipiosCodigo_municipioRouteImport.update({
+    id: '/$codigo_municipio',
+    path: '/$codigo_municipio',
+    getParentRoute: () => ApiPublicObservatorioMunicipiosRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/escolas': typeof ApiPublicEscolasRoute
+  '/api/public/observatorio/estados': typeof ApiPublicObservatorioEstadosRoute
+  '/api/public/observatorio/municipios': typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  '/api/public/observatorio/municipios/$codigo_municipio': typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/escolas': typeof ApiPublicEscolasRoute
+  '/api/public/observatorio/estados': typeof ApiPublicObservatorioEstadosRoute
+  '/api/public/observatorio/municipios': typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  '/api/public/observatorio/municipios/$codigo_municipio': typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/escolas': typeof ApiPublicEscolasRoute
+  '/api/public/observatorio/estados': typeof ApiPublicObservatorioEstadosRoute
+  '/api/public/observatorio/municipios': typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  '/api/public/observatorio/municipios/$codigo_municipio': typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/public/escolas'
+    | '/api/public/observatorio/estados'
+    | '/api/public/observatorio/municipios'
+    | '/api/public/observatorio/municipios/$codigo_municipio'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/public/escolas'
+    | '/api/public/observatorio/estados'
+    | '/api/public/observatorio/municipios'
+    | '/api/public/observatorio/municipios/$codigo_municipio'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/escolas'
+    | '/api/public/observatorio/estados'
+    | '/api/public/observatorio/municipios'
+    | '/api/public/observatorio/municipios/$codigo_municipio'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicEscolasRoute: typeof ApiPublicEscolasRoute
+  ApiPublicObservatorioEstadosRoute: typeof ApiPublicObservatorioEstadosRoute
+  ApiPublicObservatorioMunicipiosRoute: typeof ApiPublicObservatorioMunicipiosRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +106,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/escolas': {
+      id: '/api/public/escolas'
+      path: '/api/public/escolas'
+      fullPath: '/api/public/escolas'
+      preLoaderRoute: typeof ApiPublicEscolasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/observatorio/estados': {
+      id: '/api/public/observatorio/estados'
+      path: '/api/public/observatorio/estados'
+      fullPath: '/api/public/observatorio/estados'
+      preLoaderRoute: typeof ApiPublicObservatorioEstadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/observatorio/municipios': {
+      id: '/api/public/observatorio/municipios'
+      path: '/api/public/observatorio/municipios'
+      fullPath: '/api/public/observatorio/municipios'
+      preLoaderRoute: typeof ApiPublicObservatorioMunicipiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/observatorio/municipios/$codigo_municipio': {
+      id: '/api/public/observatorio/municipios/$codigo_municipio'
+      path: '/$codigo_municipio'
+      fullPath: '/api/public/observatorio/municipios/$codigo_municipio'
+      preLoaderRoute: typeof ApiPublicObservatorioMunicipiosCodigo_municipioRouteImport
+      parentRoute: typeof ApiPublicObservatorioMunicipiosRoute
+    }
   }
 }
 
+interface ApiPublicObservatorioMunicipiosRouteChildren {
+  ApiPublicObservatorioMunicipiosCodigo_municipioRoute: typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
+}
+
+const ApiPublicObservatorioMunicipiosRouteChildren: ApiPublicObservatorioMunicipiosRouteChildren =
+  {
+    ApiPublicObservatorioMunicipiosCodigo_municipioRoute:
+      ApiPublicObservatorioMunicipiosCodigo_municipioRoute,
+  }
+
+const ApiPublicObservatorioMunicipiosRouteWithChildren =
+  ApiPublicObservatorioMunicipiosRoute._addFileChildren(
+    ApiPublicObservatorioMunicipiosRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicEscolasRoute: ApiPublicEscolasRoute,
+  ApiPublicObservatorioEstadosRoute: ApiPublicObservatorioEstadosRoute,
+  ApiPublicObservatorioMunicipiosRoute:
+    ApiPublicObservatorioMunicipiosRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
