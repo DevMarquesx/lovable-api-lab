@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicEscolasRouteImport } from './routes/api/public/escolas'
 import { Route as ApiPublicObservatorioEstadosRouteImport } from './routes/api/public/observatorio/estados'
 import { Route as ApiPublicObservatorioMunicipiosRouteImport } from './routes/api/public/observatorio/municipios'
+import { Route as ApiPublicRedeSaberSplatRouteImport } from './routes/api/public/rede-saber/$'
 import { Route as ApiPublicObservatorioMunicipiosCodigo_municipioRouteImport } from './routes/api/public/observatorio/municipios.$codigo_municipio'
 
 const IndexRoute = IndexRouteImport.update({
@@ -37,6 +38,11 @@ const ApiPublicObservatorioMunicipiosRoute =
     path: '/api/public/observatorio/municipios',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicRedeSaberSplatRoute = ApiPublicRedeSaberSplatRouteImport.update({
+  id: '/api/public/rede-saber/$',
+  path: '/api/public/rede-saber/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicObservatorioMunicipiosCodigo_municipioRoute =
   ApiPublicObservatorioMunicipiosCodigo_municipioRouteImport.update({
     id: '/$codigo_municipio',
@@ -49,6 +55,7 @@ export interface FileRoutesByFullPath {
   '/api/public/escolas': typeof ApiPublicEscolasRoute
   '/api/public/observatorio/estados': typeof ApiPublicObservatorioEstadosRoute
   '/api/public/observatorio/municipios': typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  '/api/public/rede-saber/$': typeof ApiPublicRedeSaberSplatRoute
   '/api/public/observatorio/municipios/$codigo_municipio': typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
 }
 export interface FileRoutesByTo {
@@ -56,6 +63,7 @@ export interface FileRoutesByTo {
   '/api/public/escolas': typeof ApiPublicEscolasRoute
   '/api/public/observatorio/estados': typeof ApiPublicObservatorioEstadosRoute
   '/api/public/observatorio/municipios': typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  '/api/public/rede-saber/$': typeof ApiPublicRedeSaberSplatRoute
   '/api/public/observatorio/municipios/$codigo_municipio': typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
 }
 export interface FileRoutesById {
@@ -64,6 +72,7 @@ export interface FileRoutesById {
   '/api/public/escolas': typeof ApiPublicEscolasRoute
   '/api/public/observatorio/estados': typeof ApiPublicObservatorioEstadosRoute
   '/api/public/observatorio/municipios': typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  '/api/public/rede-saber/$': typeof ApiPublicRedeSaberSplatRoute
   '/api/public/observatorio/municipios/$codigo_municipio': typeof ApiPublicObservatorioMunicipiosCodigo_municipioRoute
 }
 export interface FileRouteTypes {
@@ -73,6 +82,7 @@ export interface FileRouteTypes {
     | '/api/public/escolas'
     | '/api/public/observatorio/estados'
     | '/api/public/observatorio/municipios'
+    | '/api/public/rede-saber/$'
     | '/api/public/observatorio/municipios/$codigo_municipio'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -80,6 +90,7 @@ export interface FileRouteTypes {
     | '/api/public/escolas'
     | '/api/public/observatorio/estados'
     | '/api/public/observatorio/municipios'
+    | '/api/public/rede-saber/$'
     | '/api/public/observatorio/municipios/$codigo_municipio'
   id:
     | '__root__'
@@ -87,6 +98,7 @@ export interface FileRouteTypes {
     | '/api/public/escolas'
     | '/api/public/observatorio/estados'
     | '/api/public/observatorio/municipios'
+    | '/api/public/rede-saber/$'
     | '/api/public/observatorio/municipios/$codigo_municipio'
   fileRoutesById: FileRoutesById
 }
@@ -95,6 +107,7 @@ export interface RootRouteChildren {
   ApiPublicEscolasRoute: typeof ApiPublicEscolasRoute
   ApiPublicObservatorioEstadosRoute: typeof ApiPublicObservatorioEstadosRoute
   ApiPublicObservatorioMunicipiosRoute: typeof ApiPublicObservatorioMunicipiosRouteWithChildren
+  ApiPublicRedeSaberSplatRoute: typeof ApiPublicRedeSaberSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -125,6 +138,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/observatorio/municipios'
       fullPath: '/api/public/observatorio/municipios'
       preLoaderRoute: typeof ApiPublicObservatorioMunicipiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/rede-saber/$': {
+      id: '/api/public/rede-saber/$'
+      path: '/api/public/rede-saber/$'
+      fullPath: '/api/public/rede-saber/$'
+      preLoaderRoute: typeof ApiPublicRedeSaberSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/observatorio/municipios/$codigo_municipio': {
@@ -158,6 +178,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicObservatorioEstadosRoute: ApiPublicObservatorioEstadosRoute,
   ApiPublicObservatorioMunicipiosRoute:
     ApiPublicObservatorioMunicipiosRouteWithChildren,
+  ApiPublicRedeSaberSplatRoute: ApiPublicRedeSaberSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
