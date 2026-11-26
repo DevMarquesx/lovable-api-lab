@@ -1,0 +1,21 @@
+REVOKE EXECUTE ON FUNCTION public.has_role(UUID, public.app_role) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.can_access_idoso(UUID) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.can_access_pedido(UUID) FROM anon;
+REVOKE EXECUTE ON FUNCTION public.can_access_encontro(UUID) FROM anon;
+REVOKE ALL ON FUNCTION public.handle_new_user_profile() FROM PUBLIC, anon, authenticated;
+
+CREATE INDEX auditoria_actor_id_idx ON public.auditoria(actor_id);
+CREATE INDEX autorizacoes_responsavel_id_idx ON public.autorizacoes_criancas(responsavel_id);
+CREATE INDEX autorizacoes_crianca_ativo_idx ON public.autorizacoes_criancas(crianca_id, ativo);
+CREATE INDEX certidoes_solicitado_por_idx ON public.certidoes(solicitado_por);
+CREATE INDEX criancas_cadastrado_por_idx ON public.criancas(cadastrado_por);
+CREATE INDEX encontros_criado_por_idx ON public.encontros(criado_por);
+CREATE INDEX encontros_crianca_id_idx ON public.encontros(crianca_id);
+CREATE INDEX encontros_pareamento_id_idx ON public.encontros(pareamento_id);
+CREATE INDEX idosos_cadastrado_por_idx ON public.idosos(cadastrado_por);
+CREATE INDEX pareamentos_idoso_id_idx ON public.pareamentos(idoso_id);
+CREATE INDEX pedidos_criado_por_idx ON public.pedidos_escola(criado_por);
+CREATE INDEX pedidos_decidido_por_idx ON public.pedidos_escola(decidido_por);
+CREATE INDEX presencas_registrado_por_idx ON public.presencas(registrado_por);
+CREATE INDEX vinculos_responsavel_id_idx ON public.vinculos(responsavel_id);
+CREATE INDEX escola_usuarios_co_entidade_idx ON public.escola_usuarios(co_entidade, ativo);

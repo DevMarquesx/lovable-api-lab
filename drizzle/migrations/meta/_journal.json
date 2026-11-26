@@ -15,6 +15,13 @@
       "when": 1795652651090,
       "tag": "0001_allow_coordination_to_match_idosos",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795652742741,
+      "tag": "0002_harden_functions_and_index_foreign_keys",
+      "breakpoints": true
     }
   ]
 }
